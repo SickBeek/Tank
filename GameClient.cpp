@@ -183,13 +183,14 @@ void GameClient::update(float delta)
 			for (int k = 0; k < m_bgList.size(); k++)
 			{
 				auto brick = m_bgList.at(k);
+				int type = brick->getType();
 				if (bullet->getRect().intersectsRect(brick->getRect()))
 				{
 					// 子弹消除
 					m_deleteBulletList.pushBack(bullet);
 
 					// 砖块消除
-					m_deleteBrickList.pushBack(brick);
+					m_deleteTileSpriteList.pushBack(brick);
 				}
 			}
 		}
@@ -204,10 +205,10 @@ void GameClient::update(float delta)
 		}
 
 		// 清除删除砖块列表
-		for (int j = 0; j < m_deleteBrickList.size(); j++)
+		for (int j = 0; j < m_deleteTileSpriteList.size(); j++)
 		{
-			auto brick = m_deleteBrickList.at(j);
-			m_deleteBrickList.eraseObject(brick);
+			auto brick = m_deleteTileSpriteList.at(j);
+			m_deleteTileSpriteList.eraseObject(brick);
 			m_bgList.eraseObject(brick);
 			brick->Blast();
 		}
@@ -221,7 +222,7 @@ void GameClient::update(float delta)
 			tank->Blast();
 		}
 		m_deleteBulletList.clear();
-		m_deleteBrickList.clear();
+		m_deleteTileSpriteList.clear();
 		m_deleteTankList.clear();
 	}
 }
@@ -250,7 +251,7 @@ void GameClient::drawBigBG(Vec2 position)
 				// 中间留空形成回字
 				continue;
 			}
-			auto brick = Brick::create(Vec2(position.x + (0.5 - i) * 16, position.y + (0.5 - j) * 16));
+			auto brick = TileSprite::create(Vec2(position.x + (0.5 - i) * 16, position.y + (0.5 - j) * 16),BRICK);
 			m_bgList.pushBack(brick);
 			this->addChild(brick, 2);
 		}

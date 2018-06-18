@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 #include "Tank.h"
-#include "Brick.h"
+#include "TileSprite.h"
 USING_NS_CC;
 using namespace cocos2d;
 
@@ -34,7 +34,7 @@ public:
 	Vector<Tank*> getTankList() { return m_tankList; };
 
 private:
-	Vector<Brick*>  m_bgList;     // 背景块列表
+	Vector<TileSprite*>  m_bgList;     // 背景块列表
 	Vector<Tank*>   m_tankList;   // 坦克列表
 	Tank*           m_tank;       // 主坦克
 	Vector<Tank*>	m_drawList;   // 已绘制的坦克
@@ -43,7 +43,7 @@ private:
 	Vector<Tank*>   m_shouldFireList;     // 记录需要开火的坦克 - 处理接收到开火消息的坦克
 
 	Vector<Bullet*> m_deleteBulletList;   // 删除子弹列表
-	Vector<Brick*>  m_deleteBrickList;    // 删除砖块列表
+	Vector<TileSprite*>  m_deleteTileSpriteList;    // 删除砖块列表
 	Vector<Tank*>   m_deleteTankList;     // 删除坦克列表
 };
 
